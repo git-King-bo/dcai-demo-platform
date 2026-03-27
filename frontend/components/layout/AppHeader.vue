@@ -148,7 +148,7 @@
                 MCP
               </router-link>
             </div>
-            <div class="border-t border-slate-100 mt-1 pt-1">
+            <div class="border-t border-slate-100 mt-1 pt-1" @click="logout">
               <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
                 <LogoutIcon class="w-4 h-4" />
                 {{ t('header.logout') }}
@@ -240,7 +240,11 @@ const CrownIcon = () => h('svg', { class: 'w-5 h-5', fill: 'currentColor', viewB
 const SparklesIcon = () => h('svg', { class: 'w-4 h-4', fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' }, [
   h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z' })
 ])
-
+const logout=()=>{
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+  router.push('/login')
+}
 // Page title based on route
 const pageTitle = computed(() => {
   const titleKeys = {

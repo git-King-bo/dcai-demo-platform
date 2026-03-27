@@ -2,6 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   { path: '/', name: 'home', component: () => import('../views/HomePage.vue') },
+  {
+    path: '/login',
+    name: 'login-demo',
+    component: () => import('../views/LoginView.vue'),
+    meta: { layout: 'blank' }
+  },
   { path: '/models', name: 'models', component: () => import('../views/ModelsPage.vue') },
   { path: '/models/:id(.*)', name: 'model-detail', component: () => import('../views/ModelDetailPage.vue') },
   { path: '/datasets', name: 'datasets', component: () => import('../views/DatasetsPage.vue') },

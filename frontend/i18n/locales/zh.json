@@ -28,6 +28,33 @@
     "accessTokens": "访问令牌",
     "logout": "退出登录"
   },
+  "login": {
+    "brandTagline": "元枢智慧",
+    "brandName": "YourBrand",
+    "welcomeTag": "欢迎回来",
+    "title": "登录你的工作空间",
+    "subtitle": "这些角色会根据你的鼠标、输入状态和密码是否可见做出互动反馈。",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "xxx@xxx.com",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "rememberMe": "30 天内记住我",
+    "forgotPassword": "忘记密码？",
+    "loginButton": "登录",
+    "signingIn": "登录中...",
+    "orContinueWith": "或使用以下方式继续",
+    "loginWithGoogle": "使用 Google 登录",
+    "noAccount": "还没有账号？",
+    "signUp": "注册",
+    "invalidCredentials": "邮箱或密码不正确，请重试。",
+    "success": "登录成功，欢迎回来 Erik！",
+    "successRemember": "登录成功，欢迎回来 Erik！我们会记住你的登录状态。",
+    "links": {
+      "privacyPolicy": "隐私政策",
+      "termsOfService": "服务条款",
+      "contact": "联系我们"
+    }
+  },
   "accessTokens": {
     "title": "访问令牌",
     "userAccessTokens": "用户访问令牌",

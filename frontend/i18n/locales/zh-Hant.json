@@ -28,6 +28,33 @@
     "accessTokens": "訪問令牌",
     "logout": "退出登錄"
   },
+  "login": {
+    "brandTagline": "創意入口",
+    "brandName": "YourBrand",
+    "welcomeTag": "歡迎回來",
+    "title": "登入你的工作空間",
+    "subtitle": "這些角色會根據你的游標、輸入狀態和密碼是否可見做出互動反應。",
+    "emailLabel": "電子郵件",
+    "emailPlaceholder": "xxx@xxx.com",
+    "passwordLabel": "密碼",
+    "passwordPlaceholder": "請輸入密碼",
+    "rememberMe": "30 天內記住我",
+    "forgotPassword": "忘記密碼？",
+    "loginButton": "登入",
+    "signingIn": "登入中...",
+    "orContinueWith": "或使用以下方式繼續",
+    "loginWithGoogle": "使用 Google 登入",
+    "noAccount": "還沒有帳號？",
+    "signUp": "註冊",
+    "invalidCredentials": "電子郵件或密碼不正確，請再試一次。",
+    "success": "登入成功，歡迎回來 Erik！",
+    "successRemember": "登入成功，歡迎回來 Erik！我們會記住你的登入狀態。",
+    "links": {
+      "privacyPolicy": "隱私政策",
+      "termsOfService": "服務條款",
+      "contact": "聯絡我們"
+    }
+  },
   "accessTokens": {
     "title": "訪問令牌",
     "userAccessTokens": "用戶訪問令牌",

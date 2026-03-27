@@ -28,6 +28,33 @@
     "accessTokens": "Access Tokens",
     "logout": "Logout"
   },
+  "login": {
+    "brandTagline": "YUANSHU AI",
+    "brandName": "YourBrand",
+    "welcomeTag": "Welcome Back",
+    "title": "Sign in to your workspace",
+    "subtitle": "Animated characters react to your cursor, your typing, and your password visibility state.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "xxx@xxx.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Password",
+    "rememberMe": "Remember for 30 days",
+    "forgotPassword": "Forgot password?",
+    "loginButton": "Log in",
+    "signingIn": "Signing in...",
+    "orContinueWith": "Or continue with",
+    "loginWithGoogle": "Log in with Google",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "invalidCredentials": "Invalid email or password. Please try again.",
+    "success": "Login successful! Welcome, Erik!",
+    "successRemember": "Login successful! Welcome, Erik. We will remember you.",
+    "links": {
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "contact": "Contact"
+    }
+  },
   "accessTokens": {
     "title": "Access Tokens",
     "userAccessTokens": "User Access Tokens",
