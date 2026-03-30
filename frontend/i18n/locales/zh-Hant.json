@@ -46,9 +46,47 @@
     "loginWithGoogle": "使用 Google 登入",
     "noAccount": "還沒有帳號？",
     "signUp": "註冊",
+    "haveAccount": "已經有帳號了？",
+    "rememberedPassword": "想起密碼了？",
+    "backToLogin": "返回登入",
+    "fullNameLabel": "姓名",
+    "fullNamePlaceholder": "請輸入你的姓名",
+    "confirmPasswordLabel": "確認密碼",
+    "confirmPasswordPlaceholder": "請再次輸入密碼",
     "invalidCredentials": "電子郵件或密碼不正確，請再試一次。",
     "success": "登入成功，歡迎回來 Erik！",
     "successRemember": "登入成功，歡迎回來 Erik！我們會記住你的登入狀態。",
+    "registerSuccess": "註冊資訊已成功送出占位流程，後續只需替換真實介面即可。",
+    "resetPasswordSuccess": "重設密碼郵件已透過占位流程送出，後續接入真實介面即可啟用。",
+    "validation": {
+      "emailRequired": "請輸入電子郵件地址。",
+      "fullNameRequired": "請輸入姓名。",
+      "passwordRequired": "請輸入密碼。",
+      "passwordMismatch": "兩次輸入的密碼不一致。"
+    },
+    "modes": {
+      "login": {
+        "eyebrow": "歡迎回來",
+        "title": "登入你的工作空間",
+        "description": "",
+        "submit": "登入",
+        "loading": "登入中..."
+      },
+      "register": {
+        "eyebrow": "建立帳號",
+        "title": "註冊新的工作空間帳號",
+        "description": "目前使用占位提交流程，後續只需要把提交邏輯替換成真實介面。",
+        "submit": "建立帳號",
+        "loading": "建立中..."
+      },
+      "forgot-password": {
+        "eyebrow": "找回密碼",
+        "title": "透過電子郵件重設密碼",
+        "description": "輸入你的註冊電子郵件，待接入真實介面後即可寄送重設密碼郵件。",
+        "submit": "發送重設郵件",
+        "loading": "發送中..."
+      }
+    },
     "links": {
       "privacyPolicy": "隱私政策",
       "termsOfService": "服務條款",

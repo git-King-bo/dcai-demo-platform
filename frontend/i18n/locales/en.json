@@ -46,9 +46,47 @@
     "loginWithGoogle": "Log in with Google",
     "noAccount": "Don't have an account?",
     "signUp": "Sign Up",
+    "haveAccount": "Already have an account?",
+    "rememberedPassword": "Remembered your password?",
+    "backToLogin": "Back to login",
+    "fullNameLabel": "Full name",
+    "fullNamePlaceholder": "Enter your full name",
+    "confirmPasswordLabel": "Confirm password",
+    "confirmPasswordPlaceholder": "Enter your password again",
     "invalidCredentials": "Invalid email or password. Please try again.",
     "success": "Login successful! Welcome, Erik!",
     "successRemember": "Login successful! Welcome, Erik. We will remember you.",
+    "registerSuccess": "Registration submitted successfully as a placeholder flow. Swap in the real API when ready.",
+    "resetPasswordSuccess": "Password reset request sent through the placeholder flow. Replace with the real API to enable email delivery.",
+    "validation": {
+      "emailRequired": "Please enter your email address.",
+      "fullNameRequired": "Please enter your full name.",
+      "passwordRequired": "Please enter your password.",
+      "passwordMismatch": "The passwords do not match."
+    },
+    "modes": {
+      "login": {
+        "eyebrow": "Welcome Back",
+        "title": "Sign in to your workspace",
+        "description": "",
+        "submit": "Log in",
+        "loading": "Signing in..."
+      },
+      "register": {
+        "eyebrow": "Create Account",
+        "title": "Create a new workspace account",
+        "description": "This currently uses placeholder submission logic, so you can later swap in the real API without redesigning the page.",
+        "submit": "Create account",
+        "loading": "Creating..."
+      },
+      "forgot-password": {
+        "eyebrow": "Reset Password",
+        "title": "Reset your password by email",
+        "description": "Enter your account email and we will send a reset message once the real API is connected.",
+        "submit": "Send reset link",
+        "loading": "Sending..."
+      }
+    },
     "links": {
       "privacyPolicy": "Privacy Policy",
       "termsOfService": "Terms of Service",
