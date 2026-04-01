@@ -26,7 +26,42 @@
     "profile": "Profile",
     "settings": "Settings",
     "accessTokens": "Access Tokens",
-    "logout": "Logout"
+    "logout": "Logout",
+    "theme": {
+      "title": "Theme",
+      "menuTitle": "Switch appearance",
+      "menuDescription": "Choose a workspace theme. The token system is ready for more branded skins later.",
+      "current": "Current",
+      "systemHint": "Following system: {theme}",
+      "transitioningTo": "Applying {theme}",
+      "options": {
+        "system": {
+          "label": "System",
+          "description": "Follow the operating system and automatically switch between day and night."
+        },
+        "light": {
+          "label": "Light",
+          "description": "Clean neutral surfaces for daytime work and product demos."
+        },
+        "midnight": {
+          "label": "Midnight",
+          "description": "A cinematic dark theme with brighter accents for focused sessions."
+        },
+        "aurora": {
+          "label": "Aurora",
+          "description": "A vivid teal-and-amber palette with more personality and glow."
+        }
+      }
+    },
+    "settingsDrawer": {
+      "eyebrow": "Workspace Settings",
+      "title": "Appearance Studio",
+      "description": "Tune the look and feel of the workspace from one place. The drawer is structured so more appearance controls can be added later.",
+      "appearanceTitle": "Theme Presets",
+      "appearanceDescription": "Choose the color personality for the workspace. Each preset updates semantic design tokens across the interface.",
+      "livePreview": "Live Preview",
+      "livePreviewHint": "Switching presets updates the whole workspace with the same token set."
+    }
   },
   "login": {
     "brandTagline": "YUANSHU AI",
@@ -35,7 +70,7 @@
     "title": "Sign in to your workspace",
     "subtitle": "Animated characters react to your cursor, your typing, and your password visibility state.",
     "emailLabel": "Email",
-    "emailPlaceholder": "xxx@xxx.com",
+    "emailPlaceholder": "name{'@'}example.com",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Password",
     "rememberMe": "Remember for 30 days",

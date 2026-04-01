@@ -26,7 +26,42 @@
     "profile": "個人資料",
     "settings": "設置",
     "accessTokens": "訪問令牌",
-    "logout": "退出登錄"
+    "logout": "退出登錄",
+    "theme": {
+      "title": "主題",
+      "menuTitle": "切換外觀",
+      "menuDescription": "選擇工作區主題。底層 token 已預留好，後續可以繼續擴展品牌皮膚。",
+      "current": "當前",
+      "systemHint": "當前跟隨系統：{theme}",
+      "transitioningTo": "正在切換到 {theme}",
+      "options": {
+        "system": {
+          "label": "跟隨系統",
+          "description": "自動跟隨作業系統，在淺色和夜間主題之間切換。"
+        },
+        "light": {
+          "label": "淺色",
+          "description": "適合日間辦公和產品演示的清爽中性色介面。"
+        },
+        "midnight": {
+          "label": "午夜",
+          "description": "更沉浸的暗色觀感，搭配更亮的強調色。"
+        },
+        "aurora": {
+          "label": "極光",
+          "description": "更有個性的青綠與琥珀配色，整體氛圍更活躍。"
+        }
+      }
+    },
+    "settingsDrawer": {
+      "eyebrow": "工作區設置",
+      "title": "外觀工作室",
+      "description": "在同一個地方統一調整工作區視覺。這個抽屜已按可擴展結構搭好，後續還能繼續加入更多外觀設置。",
+      "appearanceTitle": "主題預設",
+      "appearanceDescription": "選擇工作區的配色氣質。每個主題都會驅動整套語義化設計 token 一起變化。",
+      "livePreview": "即時預覽",
+      "livePreviewHint": "切換後會用同一套 token 更新整個工作區介面。"
+    }
   },
   "login": {
     "brandTagline": "創意入口",
@@ -35,7 +70,7 @@
     "title": "登入你的工作空間",
     "subtitle": "這些角色會根據你的游標、輸入狀態和密碼是否可見做出互動反應。",
     "emailLabel": "電子郵件",
-    "emailPlaceholder": "xxx@xxx.com",
+    "emailPlaceholder": "name{'@'}example.com",
     "passwordLabel": "密碼",
     "passwordPlaceholder": "請輸入密碼",
     "rememberMe": "30 天內記住我",

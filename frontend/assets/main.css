@@ -2,7 +2,140 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: #1f2937;
+@layer base {
+  :root,
+  [data-theme='light'] {
+    --background: 210 33% 98%;
+    --foreground: 222 42% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 42% 16%;
+    --panel: 210 28% 96%;
+    --panel-foreground: 222 42% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 42% 16%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+    --primary-soft: 214 100% 94%;
+    --primary-strong: 224 76% 48%;
+    --secondary: 210 40% 93%;
+    --secondary-foreground: 222 32% 21%;
+    --muted: 210 26% 93%;
+    --muted-foreground: 215 16% 42%;
+    --accent: 188 95% 43%;
+    --accent-foreground: 0 0% 100%;
+    --border: 214 24% 88%;
+    --border-strong: 214 22% 78%;
+    --ring: 221 83% 53%;
+    --sidebar: 210 25% 96%;
+    --sidebar-foreground: 222 42% 16%;
+    --sidebar-border: 214 24% 88%;
+    --sidebar-accent: 210 40% 98%;
+    --hero-from: 193 12% 25%;
+    --hero-via: 204 9% 22%;
+    --hero-to: 226 30% 29%;
+    --theme-glow-a: 210 100% 68%;
+    --theme-glow-b: 189 95% 48%;
+    --theme-glow-c: 32 98% 63%;
+    --shadow-color: 222 47% 11%;
+  }
+
+  [data-theme='midnight'] {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 96%;
+    --card: 223 39% 11%;
+    --card-foreground: 210 40% 96%;
+    --panel: 224 35% 13%;
+    --panel-foreground: 210 40% 96%;
+    --popover: 224 35% 12%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 191 96% 58%;
+    --primary-foreground: 222 47% 11%;
+    --primary-soft: 191 82% 18%;
+    --primary-strong: 191 100% 68%;
+    --secondary: 223 28% 17%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 223 28% 17%;
+    --muted-foreground: 214 18% 70%;
+    --accent: 279 89% 72%;
+    --accent-foreground: 270 100% 10%;
+    --border: 217 25% 22%;
+    --border-strong: 217 22% 30%;
+    --ring: 191 96% 58%;
+    --sidebar: 224 34% 12%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-border: 217 25% 22%;
+    --sidebar-accent: 224 28% 16%;
+    --hero-from: 225 39% 15%;
+    --hero-via: 244 28% 19%;
+    --hero-to: 270 36% 26%;
+    --theme-glow-a: 191 96% 58%;
+    --theme-glow-b: 279 89% 72%;
+    --theme-glow-c: 232 100% 73%;
+    --shadow-color: 222 84% 4%;
+  }
+
+  [data-theme='aurora'] {
+    --background: 190 58% 97%;
+    --foreground: 213 42% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 213 42% 18%;
+    --panel: 191 52% 93%;
+    --panel-foreground: 213 42% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 42% 18%;
+    --primary: 188 91% 39%;
+    --primary-foreground: 210 40% 98%;
+    --primary-soft: 187 84% 90%;
+    --primary-strong: 194 95% 33%;
+    --secondary: 197 45% 90%;
+    --secondary-foreground: 206 38% 24%;
+    --muted: 193 42% 91%;
+    --muted-foreground: 201 23% 40%;
+    --accent: 31 95% 60%;
+    --accent-foreground: 24 71% 15%;
+    --border: 190 34% 81%;
+    --border-strong: 189 28% 68%;
+    --ring: 188 91% 39%;
+    --sidebar: 193 48% 94%;
+    --sidebar-foreground: 213 42% 18%;
+    --sidebar-border: 190 34% 81%;
+    --sidebar-accent: 0 0% 100%;
+    --hero-from: 183 44% 29%;
+    --hero-via: 197 52% 34%;
+    --hero-to: 209 48% 43%;
+    --theme-glow-a: 188 91% 39%;
+    --theme-glow-b: 31 95% 60%;
+    --theme-glow-c: 163 83% 42%;
+    --shadow-color: 199 65% 18%;
+  }
+
+  * {
+    border-color: hsl(var(--border) / 1);
+  }
+
+  html {
+    background-color: hsl(var(--background) / 1);
+  }
+
+  body {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    @apply bg-background text-foreground antialiased;
+    transition: background-color 260ms ease, color 260ms ease;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+  }
+
+  .theme-ready * {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: 260ms;
+    transition-timing-function: ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-ready * {
+      transition-duration: 0ms;
+    }
+  }
 }

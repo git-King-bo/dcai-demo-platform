@@ -26,7 +26,42 @@
     "profile": "个人资料",
     "settings": "设置",
     "accessTokens": "访问令牌",
-    "logout": "退出登录"
+    "logout": "退出登录",
+    "theme": {
+      "title": "主题",
+      "menuTitle": "切换外观",
+      "menuDescription": "选择工作区主题。底层 token 已预留好，后续可以继续扩展品牌皮肤。",
+      "current": "当前",
+      "systemHint": "当前跟随系统：{theme}",
+      "transitioningTo": "正在切换到 {theme}",
+      "options": {
+        "system": {
+          "label": "跟随系统",
+          "description": "自动跟随操作系统，在浅色和夜间主题之间切换。"
+        },
+        "light": {
+          "label": "浅色",
+          "description": "适合日间办公和产品演示的清爽中性色界面。"
+        },
+        "midnight": {
+          "label": "午夜",
+          "description": "更沉浸的暗色观感，搭配更亮的强调色。"
+        },
+        "aurora": {
+          "label": "极光",
+          "description": "更有个性的青绿与琥珀配色，整体氛围更活跃。"
+        }
+      }
+    },
+    "settingsDrawer": {
+      "eyebrow": "工作区设置",
+      "title": "外观工作室",
+      "description": "在一个地方统一调整工作区视觉。这个抽屉已经按可扩展结构搭好，后面还能继续加入更多外观设置。",
+      "appearanceTitle": "主题预设",
+      "appearanceDescription": "选择工作区的配色气质。每个主题都会驱动整套语义化设计 token 一起变化。",
+      "livePreview": "实时预览",
+      "livePreviewHint": "切换后会用同一套 token 更新整个工作区界面。"
+    }
   },
   "login": {
     "brandTagline": "元枢智慧",
@@ -35,7 +70,7 @@
     "title": "登录你的工作空间",
     "subtitle": "这些角色会根据你的鼠标、输入状态和密码是否可见做出互动反馈。",
     "emailLabel": "邮箱",
-    "emailPlaceholder": "xxx@xxx.com",
+    "emailPlaceholder": "name{'@'}example.com",
     "passwordLabel": "密码",
     "passwordPlaceholder": "请输入密码",
     "rememberMe": "30 天内记住我",

@@ -1,7 +1,7 @@
 <template>
-  <div class="h-screen w-screen overflow-hidden bg-white">
+  <div class="h-screen w-screen overflow-hidden bg-background text-foreground">
     <div class="grid h-screen lg:grid-cols-[1.15fr_0.85fr]">
-      <section class="relative hidden overflow-hidden lg:flex lg:flex-col lg:justify-between lg:bg-[linear-gradient(135deg,#3c4242_0%,#323a3c_45%,#333f5f_100%)] lg:p-12 lg:text-white">
+      <section class="relative hidden overflow-hidden lg:flex lg:flex-col lg:justify-between lg:bg-[linear-gradient(135deg,hsl(var(--hero-from))_0%,hsl(var(--hero-via))_45%,hsl(var(--hero-to))_100%)] lg:p-12 lg:text-white">
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.24),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.16),transparent_35%)]" />
         <div class="hero-grid absolute inset-0 opacity-30" />
 
@@ -110,12 +110,12 @@
       <section class="relative flex items-center justify-center bg-[linear-gradient(180deg,#f8fafc_0%,#eef2ff_100%)] p-6 sm:p-8 lg:p-12">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(20,184,166,0.08),transparent_35%),radial-gradient(circle_at_bottom,rgba(30,58,138,0.08),transparent_45%)]" />
 
-        <div class="relative z-10 w-full max-w-[440px] rounded-[28px] border border-slate-200/70 bg-white/85 p-8 shadow-[0_20px_70px_rgba(30,41,59,0.12)] backdrop-blur">
+        <div class="relative z-10 w-full max-w-[440px] rounded-[28px] border border-border/70 bg-card/85 p-8 shadow-[0_20px_70px_hsl(var(--shadow-color)/0.16)] backdrop-blur">
           <div class="mb-10 flex items-center justify-center gap-3 lg:hidden">
-            <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-teal-50 text-teal-700">
+            <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <img :src="ysOrbitBadge" alt="YS brand mark" class="h-7 w-7">
             </div>
-            <span class="text-lg font-semibold text-slate-900">DCAI</span>
+            <span class="text-lg font-semibold text-foreground">DCAI</span>
           </div>
 
           <Transition name="auth-fade-slide" mode="out-in">

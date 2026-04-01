@@ -1,14 +1,14 @@
 <template>
-  <header class="h-16 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 flex items-center justify-between px-6 sticky top-0 z-40 shadow-sm">
+  <header class="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border/70 bg-card/80 px-6 shadow-[0_12px_32px_hsl(var(--shadow-color)/0.08)] backdrop-blur-xl">
     <!-- Left: Breadcrumb / Page Title -->
     <div class="flex items-center">
       <nav class="flex items-center text-sm">
-        <router-link to="/" class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100/80 transition-all duration-200">
+        <router-link to="/" class="rounded-lg p-2 text-muted-foreground transition-all duration-200 hover:bg-muted/80 hover:text-foreground">
           <HomeIcon class="w-5 h-5" />
         </router-link>
         <template v-if="pageTitle">
-          <ChevronRightIcon class="w-4 h-4 mx-1 text-slate-300" />
-          <span class="font-semibold text-slate-800 tracking-tight">{{ pageTitle }}</span>
+          <ChevronRightIcon class="mx-1 h-4 w-4 text-border-strong" />
+          <span class="font-semibold tracking-tight text-foreground">{{ pageTitle }}</span>
         </template>
       </nav>
     </div>
@@ -17,17 +17,17 @@
     <div class="flex-1 max-w-xl mx-8">
       <div class="relative group">
         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <SearchIcon class="w-4 h-4 text-slate-400 group-focus-within:text-dc-primary transition-colors" />
+          <SearchIcon class="h-4 w-4 text-muted-foreground transition-colors group-focus-within:text-primary" />
         </div>
         <input
           type="text"
           :placeholder="t('header.searchPlaceholder')"
-          class="w-full pl-11 pr-12 py-2.5 text-sm bg-slate-50/80 border border-slate-200/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-dc-primary/20 focus:border-dc-primary/50 focus:bg-white transition-all duration-200 placeholder:text-slate-400"
+          class="w-full rounded-xl border border-border/70 bg-panel/80 py-2.5 pl-11 pr-12 text-sm text-foreground transition-all duration-200 placeholder:text-muted-foreground focus:border-primary/50 focus:bg-card focus:outline-none focus:ring-2 focus:ring-primary/20"
           @keydown.enter="handleSearch"
           v-model="searchQuery"
         />
         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-          <kbd class="hidden sm:flex items-center gap-0.5 px-2 py-1 text-[10px] font-semibold text-slate-400 bg-slate-100 rounded-md border border-slate-200">
+          <kbd class="hidden items-center gap-0.5 rounded-md border border-border/80 bg-muted px-2 py-1 text-[10px] font-semibold text-muted-foreground sm:flex">
             <span>⌘</span><span>K</span>
           </kbd>
         </div>
@@ -37,7 +37,7 @@
     <!-- Right: Actions & User -->
     <div class="flex items-center gap-2">
       <!-- New Button -->
-      <button class="hidden sm:flex items-center gap-2 bg-dc-primary hover:bg-dc-primary-dark text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all duration-200 shadow-lg shadow-dc-primary/25 hover:shadow-xl hover:shadow-dc-primary/30 hover:-translate-y-0.5">
+      <button class="hidden items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-strong hover:shadow-xl hover:shadow-primary/30 sm:flex">
         <PlusIcon class="w-4 h-4" />
         <span>New</span>
       </button>
@@ -46,8 +46,8 @@
       <div class="relative">
         <button
           @click="showLanguageMenu = !showLanguageMenu"
-          class="p-2.5 text-slate-500 hover:text-slate-700 hover:bg-slate-100/80 rounded-xl transition-all duration-200"
-          :class="{ 'bg-slate-100/80': showLanguageMenu }"
+          class="rounded-xl p-2.5 text-muted-foreground transition-all duration-200 hover:bg-muted/80 hover:text-foreground"
+          :class="{ 'bg-muted/80 text-foreground': showLanguageMenu }"
         >
           <GlobeIcon class="w-5 h-5" />
         </button>
@@ -61,25 +61,25 @@
           leave-from-class="opacity-100 scale-100 translate-y-0"
           leave-to-class="opacity-0 scale-95 -translate-y-2"
         >
-          <div v-if="showLanguageMenu" class="absolute right-0 mt-2 w-40 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50 overflow-hidden">
+          <div v-if="showLanguageMenu" class="absolute right-0 z-50 mt-2 w-40 overflow-hidden rounded-2xl border border-border/70 bg-popover/95 py-2 shadow-[0_24px_70px_hsl(var(--shadow-color)/0.18)] backdrop-blur-xl">
             <button
               @click="setLanguage('zh')"
-              class="w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors"
-              :class="currentLocale === 'zh' ? 'bg-slate-50 text-dc-primary font-medium' : 'text-slate-700 hover:bg-slate-50 hover:text-dc-primary'"
+              class="flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors"
+              :class="currentLocale === 'zh' ? 'bg-primary/10 text-primary font-medium' : 'text-popover-foreground hover:bg-muted/70 hover:text-primary'"
             >
               简体中文
             </button>
             <button
               @click="setLanguage('zh-Hant')"
-              class="w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors"
-              :class="currentLocale === 'zh-Hant' ? 'bg-slate-50 text-dc-primary font-medium' : 'text-slate-700 hover:bg-slate-50 hover:text-dc-primary'"
+              class="flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors"
+              :class="currentLocale === 'zh-Hant' ? 'bg-primary/10 text-primary font-medium' : 'text-popover-foreground hover:bg-muted/70 hover:text-primary'"
             >
               繁體中文
             </button>
             <button
               @click="setLanguage('en')"
-              class="w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors"
-              :class="currentLocale === 'en' ? 'bg-slate-50 text-dc-primary font-medium' : 'text-slate-700 hover:bg-slate-50 hover:text-dc-primary'"
+              class="flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors"
+              :class="currentLocale === 'en' ? 'bg-primary/10 text-primary font-medium' : 'text-popover-foreground hover:bg-muted/70 hover:text-primary'"
             >
               English
             </button>
@@ -88,32 +88,32 @@
       </div>
 
       <!-- Credits Display -->
-      <div class="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100/80 border border-slate-200/60">
+      <div class="flex items-center gap-2 rounded-xl border border-border/70 bg-panel/80 px-3 py-2">
         <CoinIcon class="w-5 h-5 text-blue-500" />
-        <span class="text-sm font-semibold text-slate-700">30</span>
+        <span class="text-sm font-semibold text-foreground">30</span>
       </div>
 
       <!-- Notifications -->
-      <button class="relative p-2.5 text-slate-500 hover:text-slate-700 hover:bg-slate-100/80 rounded-xl transition-all duration-200">
+      <button class="relative rounded-xl p-2.5 text-muted-foreground transition-all duration-200 hover:bg-muted/80 hover:text-foreground">
         <BellIcon class="w-5 h-5" />
-        <span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white animate-pulse"></span>
+        <span class="absolute right-2.5 top-2 h-2 w-2 animate-pulse rounded-full bg-red-500 ring-2 ring-card"></span>
       </button>
 
       <!-- User Menu -->
       <div class="relative ml-1">
         <button
           @click="showUserMenu = !showUserMenu"
-          class="flex items-center gap-3 p-1.5 pr-3 rounded-xl hover:bg-slate-100/80 transition-all duration-200 group border border-slate-200/60"
-          :class="{ 'bg-slate-100/80': showUserMenu }"
+          class="group flex items-center gap-3 rounded-xl border border-border/70 p-1.5 pr-3 transition-all duration-200 hover:bg-muted/80"
+          :class="{ 'bg-muted/80': showUserMenu }"
         >
           <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-md group-hover:shadow-lg transition-shadow">
             <CrownIcon class="w-5 h-5" />
           </div>
           <div class="flex flex-col items-start">
-            <span class="text-sm font-bold text-slate-800 leading-tight">Alice</span>
-            <span class="text-[10px] font-medium text-slate-500 uppercase tracking-wide">PRO MEMBER</span>
+            <span class="text-sm font-bold leading-tight text-foreground">Alice</span>
+            <span class="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">PRO MEMBER</span>
           </div>
-          <ChevronDownIcon class="w-4 h-4 text-slate-400 transition-transform duration-200 ml-1" :class="{ 'rotate-180': showUserMenu }" />
+          <ChevronDownIcon class="ml-1 w-4 h-4 text-muted-foreground transition-transform duration-200" :class="{ 'rotate-180': showUserMenu }" />
         </button>
 
         <!-- Dropdown -->
@@ -125,30 +125,34 @@
           leave-from-class="opacity-100 scale-100 translate-y-0"
           leave-to-class="opacity-0 scale-95 -translate-y-2"
         >
-          <div v-if="showUserMenu" class="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50 overflow-hidden">
-            <div class="px-4 py-3 border-b border-slate-100">
-              <p class="text-sm font-bold text-slate-900">Alice</p>
-              <p class="text-xs text-slate-500 mt-0.5">alice@example.com</p>
+          <div v-if="showUserMenu" class="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-border/70 bg-popover/95 py-2 shadow-[0_24px_70px_hsl(var(--shadow-color)/0.18)] backdrop-blur-xl">
+            <div class="border-b border-border/70 px-4 py-3">
+              <p class="text-sm font-bold text-popover-foreground">Alice</p>
+              <p class="mt-0.5 text-xs text-muted-foreground">alice@example.com</p>
             </div>
             <div class="py-1">
-              <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-dc-primary transition-colors">
-                <UserIcon class="w-4 h-4 text-slate-400" />
+              <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-popover-foreground transition-colors hover:bg-muted/70 hover:text-primary">
+                <UserIcon class="w-4 h-4 text-muted-foreground" />
                 {{ t('header.profile') }}
               </a>
-              <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-dc-primary transition-colors">
-                <CogIcon class="w-4 h-4 text-slate-400" />
+              <button
+                type="button"
+                class="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-popover-foreground transition-colors hover:bg-muted/70 hover:text-primary"
+                @click="openSettingsDrawer"
+              >
+                <CogIcon class="w-4 h-4 text-muted-foreground" />
                 {{ t('header.settings') }}
-              </a>
-              <router-link to="/access-tokens" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-dc-primary transition-colors">
-                <KeyIcon class="w-4 h-4 text-slate-400" />
+              </button>
+              <router-link to="/access-tokens" class="flex items-center gap-3 px-4 py-2.5 text-sm text-popover-foreground transition-colors hover:bg-muted/70 hover:text-primary">
+                <KeyIcon class="w-4 h-4 text-muted-foreground" />
                 {{ t('header.accessTokens') }}
               </router-link>
-              <router-link to="/mcp" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-dc-primary transition-colors">
-                <SparklesIcon class="w-4 h-4 text-slate-400" />
+              <router-link to="/mcp" class="flex items-center gap-3 px-4 py-2.5 text-sm text-popover-foreground transition-colors hover:bg-muted/70 hover:text-primary">
+                <SparklesIcon class="w-4 h-4 text-muted-foreground" />
                 MCP
               </router-link>
             </div>
-            <div class="border-t border-slate-100 mt-1 pt-1" @click="logout">
+            <div class="mt-1 border-t border-border/70 pt-1" @click="logout">
               <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
                 <LogoutIcon class="w-4 h-4" />
                 {{ t('header.logout') }}
@@ -159,18 +163,22 @@
       </div>
     </div>
   </header>
+
+  <SettingsDrawer v-model="showSettingsDrawer" />
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, h } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import SettingsDrawer from '@/components/common/SettingsDrawer.vue'
 
 const route = useRoute()
 const router = useRouter()
 const searchQuery = ref('')
 const showUserMenu = ref(false)
 const showLanguageMenu = ref(false)
+const showSettingsDrawer = ref(false)
 
 const { locale, t } = useI18n()
 const currentLocale = computed(() => locale.value)
@@ -179,6 +187,11 @@ function setLanguage(lang) {
   locale.value = lang
   localStorage.setItem('locale', lang)
   showLanguageMenu.value = false
+}
+
+function openSettingsDrawer() {
+  showUserMenu.value = false
+  showSettingsDrawer.value = true
 }
 
 // Icon components
