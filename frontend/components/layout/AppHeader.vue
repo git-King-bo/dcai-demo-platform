@@ -1,9 +1,9 @@
 <template>
-  <header class="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border/70 bg-card/80 px-6 shadow-[0_12px_32px_hsl(var(--shadow-color)/0.08)] backdrop-blur-xl">
+  <header class="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-white/16 bg-[linear-gradient(180deg,hsl(var(--glass-highlight)/0.2),hsl(var(--glass-highlight)/0.06)),linear-gradient(180deg,hsl(var(--card)/0.72),hsl(var(--card)/0.48))] px-6 shadow-[0_24px_60px_hsl(var(--glass-shadow)/0.08)] backdrop-blur-[26px]">
     <!-- Left: Breadcrumb / Page Title -->
     <div class="flex items-center">
       <nav class="flex items-center text-sm">
-        <router-link to="/" class="rounded-lg p-2 text-muted-foreground transition-all duration-200 hover:bg-muted/80 hover:text-foreground">
+        <router-link to="/" class="inline-flex h-10 w-10 items-center justify-center rounded-[18px] text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/12 hover:text-foreground">
           <HomeIcon class="w-5 h-5" />
         </router-link>
         <template v-if="pageTitle">
@@ -27,7 +27,7 @@
           v-model="searchQuery"
         />
         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-          <kbd class="hidden items-center gap-0.5 rounded-md border border-border/80 bg-muted px-2 py-1 text-[10px] font-semibold text-muted-foreground sm:flex">
+          <kbd class="hidden items-center gap-0.5 rounded-[12px] border border-white/22 bg-white/18 px-2 py-1 text-[10px] font-semibold text-muted-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.46)] sm:flex">
             <span>⌘</span><span>K</span>
           </kbd>
         </div>
@@ -37,7 +37,7 @@
     <!-- Right: Actions & User -->
     <div class="flex items-center gap-2">
       <!-- New Button -->
-      <button class="hidden items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-strong hover:shadow-xl hover:shadow-primary/30 sm:flex">
+      <button class="hidden items-center gap-2 rounded-[22px] border border-white/28 bg-[linear-gradient(180deg,hsl(var(--glass-highlight)/0.28),transparent_42%),linear-gradient(135deg,hsl(var(--theme-glow-a)/0.92),hsl(var(--theme-glow-b)/0.72),hsl(var(--theme-glow-c)/0.76))] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.82),0_20px_42px_hsl(var(--theme-glow-a)/0.26)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_24px_48px_hsl(var(--theme-glow-a)/0.32)] sm:flex">
         <PlusIcon class="w-4 h-4" />
         <span>New</span>
       </button>
@@ -46,40 +46,33 @@
       <div class="relative">
         <button
           @click="showLanguageMenu = !showLanguageMenu"
-          class="rounded-xl p-2.5 text-muted-foreground transition-all duration-200 hover:bg-muted/80 hover:text-foreground"
-          :class="{ 'bg-muted/80 text-foreground': showLanguageMenu }"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-[20px] text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/12 hover:text-foreground"
+          :class="{ 'bg-white/14 text-foreground': showLanguageMenu }"
         >
           <GlobeIcon class="w-5 h-5" />
         </button>
 
         <!-- Language Dropdown -->
-        <Transition
-          enter-active-class="transition-all duration-200 ease-out"
-          enter-from-class="opacity-0 scale-95 -translate-y-2"
-          enter-to-class="opacity-100 scale-100 translate-y-0"
-          leave-active-class="transition-all duration-150 ease-in"
-          leave-from-class="opacity-100 scale-100 translate-y-0"
-          leave-to-class="opacity-0 scale-95 -translate-y-2"
-        >
-          <div v-if="showLanguageMenu" class="absolute right-0 z-50 mt-2 w-40 overflow-hidden rounded-2xl border border-border/70 bg-popover/95 py-2 shadow-[0_24px_70px_hsl(var(--shadow-color)/0.18)] backdrop-blur-xl">
+        <Transition name="brake-pop">
+          <div v-if="showLanguageMenu" class="absolute right-0 z-50 mt-2 w-40 overflow-hidden rounded-[26px] border border-white/28 bg-[linear-gradient(180deg,hsl(var(--glass-highlight)/0.28),hsl(var(--glass-highlight)/0.08)),linear-gradient(180deg,hsl(var(--popover)/0.84),hsl(var(--card)/0.48))] py-2 shadow-[0_28px_70px_hsl(var(--glass-shadow)/0.18)] backdrop-blur-2xl">
             <button
               @click="setLanguage('zh')"
-              class="flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors"
-              :class="currentLocale === 'zh' ? 'bg-primary/10 text-primary font-medium' : 'text-popover-foreground hover:bg-muted/70 hover:text-primary'"
+              class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-sm transition-all duration-300"
+              :class="currentLocale === 'zh' ? 'bg-white/24 text-primary font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.55)]' : 'text-popover-foreground hover:bg-white/14 hover:text-primary'"
             >
               简体中文
             </button>
             <button
               @click="setLanguage('zh-Hant')"
-              class="flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors"
-              :class="currentLocale === 'zh-Hant' ? 'bg-primary/10 text-primary font-medium' : 'text-popover-foreground hover:bg-muted/70 hover:text-primary'"
+              class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-sm transition-all duration-300"
+              :class="currentLocale === 'zh-Hant' ? 'bg-white/24 text-primary font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.55)]' : 'text-popover-foreground hover:bg-white/14 hover:text-primary'"
             >
               繁體中文
             </button>
             <button
               @click="setLanguage('en')"
-              class="flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors"
-              :class="currentLocale === 'en' ? 'bg-primary/10 text-primary font-medium' : 'text-popover-foreground hover:bg-muted/70 hover:text-primary'"
+              class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-sm transition-all duration-300"
+              :class="currentLocale === 'en' ? 'bg-white/24 text-primary font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.55)]' : 'text-popover-foreground hover:bg-white/14 hover:text-primary'"
             >
               English
             </button>
@@ -89,13 +82,13 @@
 
       <!-- Credits Display -->
       <div class="flex items-center gap-2 rounded-xl border border-border/70 bg-panel/80 px-3 py-2">
-        <CoinIcon class="w-5 h-5 text-blue-500" />
+      <CoinIcon class="w-5 h-5 text-blue-500" />
         <span class="text-sm font-semibold text-foreground">30</span>
       </div>
 
       <!-- Notifications -->
-      <button class="relative rounded-xl p-2.5 text-muted-foreground transition-all duration-200 hover:bg-muted/80 hover:text-foreground">
-        <BellIcon class="w-5 h-5" />
+      <button class="bell-trigger relative inline-flex h-11 w-11 items-center justify-center rounded-[20px] text-muted-foreground transition-all duration-300 hover:bg-white/12 hover:text-foreground">
+        <BellIcon class="bell-swing w-5 h-5" />
         <span class="absolute right-2.5 top-2 h-2 w-2 animate-pulse rounded-full bg-red-500 ring-2 ring-card"></span>
       </button>
 
@@ -103,10 +96,10 @@
       <div class="relative ml-1">
         <button
           @click="showUserMenu = !showUserMenu"
-          class="group flex items-center gap-3 rounded-xl border border-border/70 p-1.5 pr-3 transition-all duration-200 hover:bg-muted/80"
-          :class="{ 'bg-muted/80': showUserMenu }"
+          class="group flex items-center gap-3 rounded-[24px] border border-white/20 bg-white/12 p-1.5 pr-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.46),0_16px_30px_hsl(var(--glass-shadow)/0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/18"
+          :class="{ 'bg-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.56),0_20px_36px_hsl(var(--glass-shadow)/0.06)]': showUserMenu }"
         >
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-md group-hover:shadow-lg transition-shadow">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full bg-[linear-gradient(180deg,hsl(var(--glass-highlight)/0.22),transparent_40%),linear-gradient(135deg,hsl(var(--theme-glow-a)/0.9),hsl(var(--theme-glow-b)/0.75),hsl(var(--theme-glow-c)/0.7))] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_30px_hsl(var(--theme-glow-a)/0.18)] transition-shadow group-hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.84),0_22px_36px_hsl(var(--theme-glow-a)/0.24)]">
             <CrownIcon class="w-5 h-5" />
           </div>
           <div class="flex flex-col items-start">
@@ -117,43 +110,36 @@
         </button>
 
         <!-- Dropdown -->
-        <Transition
-          enter-active-class="transition-all duration-200 ease-out"
-          enter-from-class="opacity-0 scale-95 -translate-y-2"
-          enter-to-class="opacity-100 scale-100 translate-y-0"
-          leave-active-class="transition-all duration-150 ease-in"
-          leave-from-class="opacity-100 scale-100 translate-y-0"
-          leave-to-class="opacity-0 scale-95 -translate-y-2"
-        >
-          <div v-if="showUserMenu" class="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-border/70 bg-popover/95 py-2 shadow-[0_24px_70px_hsl(var(--shadow-color)/0.18)] backdrop-blur-xl">
-            <div class="border-b border-border/70 px-4 py-3">
+        <Transition name="brake-pop">
+          <div v-if="showUserMenu" class="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-[28px] border border-white/28 bg-[linear-gradient(180deg,hsl(var(--glass-highlight)/0.28),hsl(var(--glass-highlight)/0.08)),linear-gradient(180deg,hsl(var(--popover)/0.84),hsl(var(--card)/0.48))] py-2 shadow-[0_28px_70px_hsl(var(--glass-shadow)/0.18)] backdrop-blur-2xl">
+            <div class="border-b border-white/14 px-4 py-3">
               <p class="text-sm font-bold text-popover-foreground">Alice</p>
               <p class="mt-0.5 text-xs text-muted-foreground">alice@example.com</p>
             </div>
             <div class="py-1">
-              <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-popover-foreground transition-colors hover:bg-muted/70 hover:text-primary">
+              <a href="#" class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-sm text-popover-foreground transition-all duration-300 hover:bg-white/14 hover:text-primary">
                 <UserIcon class="w-4 h-4 text-muted-foreground" />
                 {{ t('header.profile') }}
               </a>
               <button
                 type="button"
-                class="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-popover-foreground transition-colors hover:bg-muted/70 hover:text-primary"
+                class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-left text-sm text-popover-foreground transition-all duration-300 hover:bg-white/14 hover:text-primary"
                 @click="openSettingsDrawer"
               >
                 <CogIcon class="w-4 h-4 text-muted-foreground" />
                 {{ t('header.settings') }}
               </button>
-              <router-link to="/access-tokens" class="flex items-center gap-3 px-4 py-2.5 text-sm text-popover-foreground transition-colors hover:bg-muted/70 hover:text-primary">
+              <router-link to="/access-tokens" class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-sm text-popover-foreground transition-all duration-300 hover:bg-white/14 hover:text-primary">
                 <KeyIcon class="w-4 h-4 text-muted-foreground" />
                 {{ t('header.accessTokens') }}
               </router-link>
-              <router-link to="/mcp" class="flex items-center gap-3 px-4 py-2.5 text-sm text-popover-foreground transition-colors hover:bg-muted/70 hover:text-primary">
+              <router-link to="/mcp" class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-sm text-popover-foreground transition-all duration-300 hover:bg-white/14 hover:text-primary">
                 <SparklesIcon class="w-4 h-4 text-muted-foreground" />
                 MCP
               </router-link>
             </div>
-            <div class="mt-1 border-t border-border/70 pt-1" @click="logout">
-              <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
+            <div class="mt-1 border-t border-white/14 pt-1" @click="logout">
+              <a href="#" class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-sm text-red-600 transition-all duration-300 hover:bg-red-50/70">
                 <LogoutIcon class="w-4 h-4" />
                 {{ t('header.logout') }}
               </a>
@@ -323,3 +309,32 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 </script>
+
+<style scoped>
+.bell-swing {
+  transform-origin: top center;
+}
+
+.bell-trigger:hover .bell-swing {
+  animation: bellSwing 620ms ease-out 1;
+}
+
+@keyframes bellSwing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(16deg);
+  }
+  38% {
+    transform: rotate(-13deg);
+  }
+  58% {
+    transform: rotate(8deg);
+  }
+  78% {
+    transform: rotate(-4deg);
+  }
+}
+</style>

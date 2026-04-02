@@ -1,34 +1,42 @@
 <template>
   <aside 
-    class="fixed left-0 top-0 h-full flex flex-col z-50 shadow-lg transition-all duration-300 ease-in-out"
+    class="fixed left-0 top-0 z-50 flex h-full flex-col overflow-hidden transition-all duration-500 ease-out"
     :class="[
       isCollapsed ? 'w-16' : 'w-60',
-      'bg-sidebar text-sidebar-foreground border-r border-sidebar-border shadow-[0_18px_60px_hsl(var(--shadow-color)/0.12)]'
+      'border-r border-white/24 bg-[linear-gradient(180deg,hsl(var(--glass-highlight)/0.24),hsl(var(--glass-highlight)/0.08)),linear-gradient(180deg,hsl(var(--sidebar)/0.82),hsl(var(--card)/0.58))] text-sidebar-foreground shadow-[0_28px_80px_hsl(var(--glass-shadow)/0.16)] backdrop-blur-[28px]'
     ]"
   >
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute inset-x-4 top-0 h-px bg-white/50"></div>
+      <div class="absolute -left-10 top-12 h-36 w-36 rounded-full bg-white/18 blur-3xl"></div>
+      <div class="absolute -right-10 bottom-24 h-44 w-44 rounded-full bg-primary/12 blur-3xl"></div>
+    </div>
+
     <!-- Logo & Toggle -->
     <div 
-      class="flex h-16 items-center border-b border-sidebar-border"
+      class="relative flex h-16 items-center border-b border-white/14"
       :class="isCollapsed ? 'justify-center px-2' : 'px-5'"
     >
       <router-link to="/" class="flex items-center gap-3 group" v-if="!isCollapsed">
-        <div class="relative">
-          <img src="/logo.png" alt="DCAI" class="w-9 h-9 rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300" />
+        <div class="relative flex h-10 w-10 items-center justify-center rounded-[18px] border border-white/25 bg-white/18 shadow-[inset_0_1px_0_rgba(255,255,255,0.62),0_18px_36px_hsl(var(--glass-shadow)/0.12)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-[1.03]">
+          <img src="/logo.png" alt="DCAI" class="h-9 w-9 rounded-[14px]" />
         </div>
         <div class="flex flex-col">
           <span class="text-lg font-bold tracking-tight text-sidebar-foreground">{{ t('app.title') }}</span>
-          <span class="-mt-1 text-[10px] text-muted-foreground">{{ t('app.subtitle') }}</span>
+          <span class="-mt-0.5 text-[10px] uppercase text-muted-foreground/90">{{ t('app.subtitle') }}</span>
         </div>
       </router-link>
       <router-link to="/" class="flex items-center justify-center" v-else>
-        <img src="/logo.png" alt="DCAI" class="w-9 h-9 rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+        <div class="flex h-10 w-10 items-center justify-center rounded-[18px] border border-white/25 bg-white/18 shadow-[inset_0_1px_0_rgba(255,255,255,0.62),0_18px_36px_hsl(var(--glass-shadow)/0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.03]">
+          <img src="/logo.png" alt="DCAI" class="h-9 w-9 rounded-[14px]" />
+        </div>
       </router-link>
       
       <!-- Collapse Toggle Button (only show when expanded) -->
       <button 
         v-if="!isCollapsed"
         @click="toggleCollapse"
-        class="ml-auto rounded-lg p-1.5 text-muted-foreground transition-all duration-200 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+        class="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-[18px] border border-white/24 bg-white/16 text-muted-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.58)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/24 hover:text-sidebar-foreground"
         :title="t('nav.collapseSidebar')"
       >
         <ChevronLeftIcon class="w-4 h-4" />
@@ -39,7 +47,7 @@
     <button 
       v-if="isCollapsed"
       @click="toggleCollapse"
-      class="absolute -right-3 top-20 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-sidebar-border bg-card text-muted-foreground shadow-md transition-all duration-200 hover:text-sidebar-foreground hover:shadow-lg"
+      class="absolute -right-3 top-20 z-50 flex h-8 w-8 items-center justify-center rounded-full border border-white/35 bg-white/72 text-muted-foreground shadow-[0_16px_32px_hsl(var(--glass-shadow)/0.16)] backdrop-blur-2xl transition-all duration-300 hover:scale-105 hover:text-sidebar-foreground"
       :title="t('nav.expandSidebar')"
     >
       <ChevronRightIcon class="w-3 h-3" />
@@ -47,9 +55,9 @@
 
     <!-- Nav Links -->
     <nav class="flex-1 py-4 overflow-y-auto" :class="isCollapsed ? 'px-2 overflow-x-hidden scrollbar-hide' : 'px-3'">
-      <div v-if="!isCollapsed" class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{{ t('nav.menu') }}</div>
+      <div v-if="!isCollapsed" class="mb-3 px-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground/85">{{ t('nav.menu') }}</div>
       <div v-else class="mb-2 text-center">
-        <div class="mx-auto h-px w-8 bg-sidebar-border"></div>
+        <div class="mx-auto h-px w-8 bg-white/20"></div>
       </div>
       
       <template v-for="link in navLinks" :key="link.to">
@@ -58,16 +66,16 @@
           <button
             v-if="!isCollapsed"
             @click="toggleDropdown(link.to)"
-            class="nav-entry group relative w-full flex items-center justify-between overflow-hidden rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200"
-            :class="isActive(link.to) ? 'bg-sidebar-accent text-sidebar-foreground' : 'text-muted-foreground hover:bg-card/70 hover:text-sidebar-foreground'"
+            class="nav-entry group relative flex w-full items-center justify-between overflow-hidden rounded-[22px] px-3 py-2.5 text-sm font-medium transition-all duration-300"
+            :class="isActive(link.to) ? 'bg-white/26 text-sidebar-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_18px_36px_hsl(var(--glass-shadow)/0.08)]' : 'text-muted-foreground hover:bg-white/16 hover:text-sidebar-foreground'"
           >
             <span v-if="isActive(link.to)" class="nav-spotlight" />
             <div class="flex items-center gap-3">
-              <component :is="link.icon" class="w-5 h-5" :class="isActive(link.to) ? 'text-primary' : 'text-muted-foreground'" />
+              <component :is="link.icon" class="w-5 h-5 transition-colors" :class="isActive(link.to) ? 'text-primary' : 'text-muted-foreground group-hover:text-sidebar-foreground'" />
               <span>{{ t(link.labelKey) }}</span>
             </div>
             <svg 
-              class="w-4 h-4 text-muted-foreground transition-transform duration-200" 
+              class="w-4 h-4 text-muted-foreground transition-transform duration-300" 
               :class="{ 'rotate-90': dropdownOpen[link.to] }"
               fill="none" 
               stroke="currentColor" 
@@ -81,8 +89,8 @@
           <div v-else class="flex flex-col items-center gap-1">
             <router-link
               :to="link.to"
-              class="nav-entry group relative w-full flex items-center justify-center overflow-hidden rounded-xl p-2 transition-all duration-200"
-              :class="isActive(link.to) ? 'bg-sidebar-accent text-primary' : 'text-muted-foreground hover:bg-card/70 hover:text-sidebar-foreground'"
+              class="nav-entry group relative flex w-full items-center justify-center overflow-hidden rounded-[20px] p-2 transition-all duration-300"
+              :class="isActive(link.to) ? 'bg-white/24 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.56)]' : 'text-muted-foreground hover:bg-white/16 hover:text-sidebar-foreground'"
             >
               <span v-if="isActive(link.to)" class="nav-spotlight nav-spotlight-collapsed" />
               <component :is="link.icon" class="w-5 h-5" />
@@ -93,13 +101,13 @@
                 v-for="child in link.children"
                 :key="child.to"
                 :to="child.to"
-                class="nav-entry group relative flex items-center justify-center overflow-hidden rounded-lg p-1.5 transition-all duration-200"
-                :class="route.path === child.to ? 'bg-sidebar-accent text-primary' : 'text-muted-foreground hover:bg-card/70 hover:text-sidebar-foreground'"
+                class="nav-entry group relative flex items-center justify-center overflow-hidden rounded-[16px] p-1.5 transition-all duration-300"
+                :class="route.path === child.to ? 'bg-white/24 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.56)]' : 'text-muted-foreground hover:bg-white/16 hover:text-sidebar-foreground'"
               >
                 <span v-if="route.path === child.to" class="nav-spotlight nav-spotlight-collapsed" />
                 <component :is="child.iconComponent" class="w-4 h-4" />
                 <!-- Tooltip for collapsed child icons -->
-                <div class="absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs text-background opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100">
+                <div class="absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-[14px] border border-white/20 bg-foreground/92 px-3 py-1.5 text-xs text-background opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100">
                   {{ t(child.labelKey) }}
                 </div>
               </router-link>
@@ -109,14 +117,14 @@
           <!-- Dropdown menu (only when expanded) -->
           <div
             v-show="dropdownOpen[link.to] && !isCollapsed"
-            class="mt-1 space-y-0.5 pl-4 animate-slideDown"
+            class="mt-1 space-y-1 pl-4 animate-slideDown"
           >
               <router-link
                 v-for="child in link.children"
                 :key="child.to"
                 :to="child.to"
-                class="nav-entry group relative flex items-center gap-3 overflow-hidden rounded-lg px-3 py-2 text-sm transition-all duration-200"
-                :class="route.path === child.to ? 'bg-card/80 text-primary font-medium' : 'text-muted-foreground hover:bg-card/70 hover:text-sidebar-foreground'"
+                class="nav-entry group relative flex items-center gap-3 overflow-hidden rounded-[18px] px-3 py-2 text-sm transition-all duration-300"
+                :class="route.path === child.to ? 'bg-white/22 text-primary font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.52)]' : 'text-muted-foreground hover:bg-white/14 hover:text-sidebar-foreground'"
               >
                 <span v-if="route.path === child.to" class="nav-spotlight nav-spotlight-sub" />
                 <component :is="child.iconComponent" class="w-4 h-4" />
@@ -127,15 +135,15 @@
           <!-- Collapsed: Show children on hover -->
           <div
             v-if="isCollapsed && dropdownOpen[link.to]"
-            class="absolute left-full top-0 z-50 ml-2 w-40 rounded-xl border border-border/70 bg-popover/95 py-2 shadow-xl backdrop-blur-xl"
+            class="absolute left-full top-0 z-50 ml-2 w-44 rounded-[24px] border border-white/28 bg-popover/80 py-2 shadow-[0_24px_70px_hsl(var(--glass-shadow)/0.18)] backdrop-blur-2xl"
           >
-            <div class="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{{ t(link.labelKey) }}</div>
+            <div class="px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">{{ t(link.labelKey) }}</div>
             <router-link
               v-for="child in link.children"
               :key="child.to"
               :to="child.to"
               class="flex items-center gap-2 px-3 py-2 text-sm transition-all duration-200"
-              :class="route.path === child.to ? 'bg-primary/10 text-primary font-medium' : 'text-popover-foreground hover:bg-muted/70 hover:text-primary'"
+              :class="route.path === child.to ? 'bg-white/26 text-primary font-medium' : 'text-popover-foreground hover:bg-white/14 hover:text-primary'"
               @click="dropdownOpen[link.to] = false"
             >
               <component :is="child.iconComponent" class="w-4 h-4" />
@@ -148,10 +156,10 @@
         <router-link
           v-if="!link.children"
           :to="link.to"
-          class="nav-entry group relative flex items-center overflow-hidden rounded-xl text-sm font-medium transition-all duration-200"
+          class="nav-entry group relative flex items-center overflow-hidden rounded-[22px] text-sm font-medium transition-all duration-300 leading-[30px]"
           :class="[
             isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
-            isActive(link.to) ? 'bg-sidebar-accent text-sidebar-foreground' : 'text-muted-foreground hover:bg-card/70 hover:text-sidebar-foreground'
+            isActive(link.to) ? 'bg-white/26 text-sidebar-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_18px_36px_hsl(var(--glass-shadow)/0.08)]' : 'text-muted-foreground hover:bg-white/16 hover:text-sidebar-foreground'
           ]"
         >
           <span v-if="isActive(link.to)" :class="isCollapsed ? 'nav-spotlight nav-spotlight-collapsed' : 'nav-spotlight'" />
@@ -160,7 +168,7 @@
           <div v-if="isActive(link.to) && !isCollapsed" class="ml-auto h-1.5 w-1.5 rounded-full bg-primary"></div>
           
           <!-- Tooltip for collapsed state -->
-          <div v-if="isCollapsed" class="absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs text-background opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100">
+          <div v-if="isCollapsed" class="absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-[14px] border border-white/20 bg-foreground/92 px-3 py-1.5 text-xs text-background opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100">
             {{ t(link.labelKey) }}
           </div>
         </router-link>
@@ -168,23 +176,23 @@
     </nav>
 
     <!-- Help & Support -->
-    <div class="border-t border-sidebar-border" :class="isCollapsed ? 'p-2' : 'p-3'">
+    <div class="relative border-t border-white/14" :class="isCollapsed ? 'p-2' : 'p-3'">
       <button 
-        class="nav-entry group relative flex items-center overflow-hidden rounded-xl transition-all duration-200"
+        class="nav-entry group relative flex items-center overflow-hidden rounded-[22px] transition-all duration-300"
         :class="[
-          isCollapsed ? 'justify-center p-2.5 w-full' : 'gap-3 px-3 py-2.5 w-full text-muted-foreground hover:bg-card/70 hover:text-sidebar-foreground',
+          isCollapsed ? 'justify-center p-2.5 w-full' : 'gap-3 px-3 py-2.5 w-full text-muted-foreground hover:bg-white/16 hover:text-sidebar-foreground',
         ]"
       >
         <div 
-          class="flex items-center justify-center rounded-lg transition-colors"
-          :class="isCollapsed ? 'h-8 w-8 bg-card/80 text-muted-foreground' : 'h-8 w-8 bg-card/80 text-muted-foreground group-hover:bg-card'"
+          class="flex items-center justify-center rounded-[18px] border border-white/20 transition-colors"
+          :class="isCollapsed ? 'h-8 w-8 bg-white/16 text-muted-foreground' : 'h-8 w-8 bg-white/16 text-muted-foreground group-hover:bg-white/24'"
         >
           <QuestionMarkCircleIcon class="w-4 h-4" />
         </div>
         <span v-if="!isCollapsed" class="font-medium text-sm">{{ t('nav.helpSupport') }}</span>
         
         <!-- Tooltip for collapsed state -->
-        <div v-if="isCollapsed" class="absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs text-background opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100">
+        <div v-if="isCollapsed" class="absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-[14px] border border-white/20 bg-foreground/92 px-3 py-1.5 text-xs text-background opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100">
           {{ t('nav.helpSupport') }}
         </div>
       </button>
@@ -263,15 +271,17 @@ const QuestionMarkCircleIcon = () => h('svg', { class: 'w-4 h-4', fill: 'none', 
 const navLinks = [
   { to: '/datasets', labelKey: 'nav.datasets', icon: DatabaseIcon },
   { to: '/knowledge-base', labelKey: 'nav.knowledgeBase', icon: BookOpenIcon },
-  {
-    to: '/dataflow/canvas',
-    labelKey: 'nav.dataflow',
-    icon: FlowIcon,
-    children: [
-      { to: '/dataflow/canvas', labelKey: 'nav.canvas', iconComponent: CanvasIcon },
-      { to: '/dataflow', labelKey: 'nav.packages', iconComponent: PackageIcon },
-    ],
-  },
+  { to: '/dataflow/canvas', labelKey: 'nav.dataflow', icon: CanvasIcon },
+  { to: '/operator', labelKey: 'nav.packages', icon: PackageIcon },
+  // {
+  //   to: '/dataflow/canvas',
+  //   labelKey: 'nav.dataflow',
+  //   icon: FlowIcon,
+  //   children: [
+  //     { to: '/dataflow/canvas', labelKey: 'nav.canvas', iconComponent: CanvasIcon },
+  //     { to: '/dataflow', labelKey: 'nav.packages', iconComponent: PackageIcon },
+  //   ],
+  // },
   { to: '/dataflow/tasks', labelKey: 'nav.tasks', icon: TasksIcon },
   { to: '/apps', labelKey: 'nav.apps', icon: RocketIcon },
   { to: '/models', labelKey: 'nav.models', icon: CubeIcon },
@@ -289,6 +299,7 @@ function isActive(path) {
 <style scoped>
 .nav-entry {
   isolation: isolate;
+  transform-origin: left center;
 }
 
 .nav-spotlight {
@@ -355,16 +366,20 @@ function isActive(path) {
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-12px) scale(0.96);
+  }
+  68% {
+    opacity: 1;
+    transform: translateY(3px) scale(1.01);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .animate-slideDown {
-  animation: slideDown 0.2s ease-out;
+  animation: slideDown 0.42s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Hide scrollbars when sidebar is collapsed */

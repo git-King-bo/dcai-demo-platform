@@ -37,6 +37,8 @@
     --theme-glow-b: 189 95% 48%;
     --theme-glow-c: 32 98% 63%;
     --shadow-color: 222 47% 11%;
+    --glass-highlight: 0 0% 100%;
+    --glass-shadow: 204 52% 44%;
   }
 
   [data-theme='midnight'] {
@@ -72,6 +74,8 @@
     --theme-glow-b: 279 89% 72%;
     --theme-glow-c: 232 100% 73%;
     --shadow-color: 222 84% 4%;
+    --glass-highlight: 214 100% 97%;
+    --glass-shadow: 222 84% 4%;
   }
 
   [data-theme='aurora'] {
@@ -107,6 +111,8 @@
     --theme-glow-b: 31 95% 60%;
     --theme-glow-c: 163 83% 42%;
     --shadow-color: 199 65% 18%;
+    --glass-highlight: 0 0% 100%;
+    --glass-shadow: 192 44% 27%;
   }
 
   * {
@@ -120,6 +126,11 @@
   body {
     font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at top left, hsl(var(--theme-glow-a) / 0.2), transparent 30%),
+      radial-gradient(circle at top right, hsl(var(--theme-glow-c) / 0.16), transparent 26%),
+      linear-gradient(180deg, hsl(var(--background) / 1), hsl(var(--background) / 0.98));
+    background-attachment: fixed;
     transition: background-color 260ms ease, color 260ms ease;
   }
 
@@ -137,5 +148,405 @@
     .theme-ready * {
       transition-duration: 0ms;
     }
+  }
+}
+
+@layer components {
+  .jelly-surface,
+  .jelly-dropdown-panel,
+  .jelly-dropdown-trigger,
+  .jelly-modal-shell,
+  .jelly-button {
+    border: 1px solid hsl(var(--glass-highlight) / 0.34);
+    backdrop-filter: blur(24px) saturate(165%);
+    -webkit-backdrop-filter: blur(24px) saturate(165%);
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-highlight) / 0.62),
+      0 20px 50px hsl(var(--glass-shadow) / 0.1);
+  }
+
+  .jelly-surface {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.34), hsl(var(--glass-highlight) / 0.1)),
+      linear-gradient(135deg, hsl(var(--card) / 0.78), hsl(var(--card) / 0.46));
+  }
+
+  .jelly-surface::before,
+  .jelly-modal-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(135deg, hsl(var(--glass-highlight) / 0.32), transparent 36%),
+      radial-gradient(circle at 85% 12%, hsl(var(--glass-highlight) / 0.2), transparent 22%);
+  }
+
+  .jelly-surface-default {
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.34), hsl(var(--glass-highlight) / 0.1)),
+      linear-gradient(135deg, hsl(var(--card) / 0.78), hsl(var(--card) / 0.46));
+  }
+
+  .jelly-surface-soft {
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.28), hsl(var(--glass-highlight) / 0.08)),
+      linear-gradient(135deg, hsl(var(--panel) / 0.74), hsl(var(--card) / 0.34));
+  }
+
+  .jelly-surface-accent {
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.22), transparent 38%),
+      linear-gradient(135deg, hsl(var(--theme-glow-a) / 0.26), hsl(var(--theme-glow-b) / 0.16), hsl(var(--card) / 0.5));
+  }
+
+  .jelly-surface-elevated {
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-highlight) / 0.7),
+      0 28px 80px hsl(var(--glass-shadow) / 0.14);
+  }
+
+  .jelly-surface-header,
+  .jelly-surface-footer {
+    position: relative;
+    z-index: 1;
+  }
+
+  .jelly-surface-footer {
+    margin-top: 1.25rem;
+  }
+
+  .jelly-surface-body {
+    position: relative;
+    z-index: 1;
+  }
+
+  .jelly-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    overflow: hidden;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition:
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      background 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jelly-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, hsl(var(--glass-highlight) / 0.38), transparent 58%);
+    pointer-events: none;
+  }
+
+  .jelly-button:hover {
+    transform: translateY(-2px) scale(1.015);
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-highlight) / 0.72),
+      0 24px 52px hsl(var(--glass-shadow) / 0.13);
+  }
+
+  .jelly-button:active {
+    transform: translateY(1px) scale(0.985);
+    transition-duration: 140ms;
+  }
+
+  .jelly-button-default {
+    color: hsl(var(--foreground) / 0.86);
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.3), hsl(var(--glass-highlight) / 0.1)),
+      hsl(var(--card) / 0.18);
+  }
+
+  .jelly-button-primary {
+    color: hsl(var(--primary-foreground) / 1);
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.24), transparent 42%),
+      linear-gradient(135deg, hsl(var(--theme-glow-a) / 0.9), hsl(var(--theme-glow-b) / 0.7), hsl(var(--theme-glow-c) / 0.72));
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-highlight) / 0.8),
+      0 20px 48px hsl(var(--theme-glow-a) / 0.24);
+  }
+
+  .jelly-button-ghost {
+    color: hsl(var(--foreground) / 0.8);
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.14), transparent 68%),
+      transparent;
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-highlight) / 0.36),
+      0 10px 24px hsl(var(--glass-shadow) / 0.04);
+  }
+
+  .jelly-button-icon {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jelly-dropdown-trigger {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 24px;
+    padding: 0.95rem 1rem;
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.28), hsl(var(--glass-highlight) / 0.08)),
+      hsl(var(--card) / 0.18);
+    text-align: left;
+    transition:
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jelly-dropdown-trigger:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-highlight) / 0.72),
+      0 24px 52px hsl(var(--glass-shadow) / 0.12);
+  }
+
+  .jelly-dropdown-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 12px);
+    z-index: 40;
+    border-radius: 28px;
+    padding: 0.65rem;
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.28), hsl(var(--glass-highlight) / 0.1)),
+      linear-gradient(135deg, hsl(var(--popover) / 0.82), hsl(var(--card) / 0.48));
+  }
+
+  .jelly-dropdown-option {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-radius: 20px;
+    padding: 0.9rem 0.95rem;
+    color: hsl(var(--foreground) / 0.74);
+    transition:
+      transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 260ms ease,
+      box-shadow 260ms ease;
+  }
+
+  .jelly-dropdown-option:hover {
+    transform: translateX(3px);
+    background: hsl(var(--glass-highlight) / 0.22);
+  }
+
+  .jelly-dropdown-option-active {
+    background: hsl(var(--glass-highlight) / 0.3);
+    color: hsl(var(--foreground) / 1);
+    box-shadow: inset 0 1px 0 hsl(var(--glass-highlight) / 0.58);
+  }
+
+  .jelly-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: hsl(var(--foreground) / 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .jelly-modal-shell {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 34px;
+    background:
+      linear-gradient(180deg, hsl(var(--glass-highlight) / 0.34), hsl(var(--glass-highlight) / 0.08)),
+      linear-gradient(135deg, hsl(var(--popover) / 0.84), hsl(var(--card) / 0.5));
+  }
+
+  .jelly-modal-close {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    height: 2.75rem;
+    width: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    border: 1px solid hsl(var(--glass-highlight) / 0.32);
+    background: hsl(var(--glass-highlight) / 0.16);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), background-color 220ms ease;
+  }
+
+  .jelly-modal-close:hover {
+    transform: rotate(90deg) scale(1.05);
+    background: hsl(var(--glass-highlight) / 0.26);
+  }
+}
+
+@layer utilities {
+  .jelly-brake-reveal {
+    animation: brakeReveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .jelly-brake-delay-1 {
+    animation-delay: 70ms;
+  }
+
+  .jelly-brake-delay-2 {
+    animation-delay: 140ms;
+  }
+
+  .jelly-brake-delay-3 {
+    animation-delay: 210ms;
+  }
+}
+
+.brake-pop-enter-active,
+.brake-pop-leave-active,
+.brake-sheet-enter-active,
+.brake-sheet-leave-active,
+.brake-fade-enter-active,
+.brake-fade-leave-active {
+  will-change: opacity, transform, filter;
+}
+
+.brake-pop-enter-active {
+  animation: brakePopIn 720ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brake-pop-leave-active {
+  animation: brakePopOut 180ms cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+.brake-sheet-enter-active {
+  animation: brakeSheetIn 820ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brake-sheet-leave-active {
+  animation: brakeSheetOut 220ms cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+.brake-fade-enter-active {
+  animation: brakeFadeIn 240ms ease-out;
+}
+
+.brake-fade-leave-active {
+  animation: brakeFadeOut 180ms ease-in forwards;
+}
+
+@keyframes brakePopIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 34px, 0) scale(0.88);
+    filter: blur(10px);
+  }
+  58% {
+    opacity: 1;
+    transform: translate3d(0, -9px, 0) scale(1.02);
+    filter: blur(0);
+  }
+  76% {
+    transform: translate3d(0, 4px, 0) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes brakePopOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.96);
+  }
+}
+
+@keyframes brakeSheetIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 54px, 0) scale(0.9);
+    filter: blur(16px);
+  }
+  55% {
+    opacity: 1;
+    transform: translate3d(0, -14px, 0) scale(1.02);
+    filter: blur(0);
+  }
+  78% {
+    transform: translate3d(0, 6px, 0) scale(0.996);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes brakeSheetOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.965);
+  }
+}
+
+@keyframes brakeFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes brakeFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes brakeReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.95);
+    filter: blur(12px);
+  }
+  62% {
+    opacity: 1;
+    transform: translate3d(0, -6px, 0) scale(1.01);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
   }
 }
