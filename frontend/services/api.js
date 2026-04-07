@@ -5,16 +5,24 @@
 
 import { isMockMode, isApiMode, getApiUrl } from '@/config/index.js'
 
+function getStoredToken() {
+  if (typeof window === 'undefined') {
+    return ''
+  }
+
+  return localStorage.getItem('token') || sessionStorage.getItem('token') || ''
+}
+
 /**
  * Generic fetch wrapper with error handling
  */
 async function fetchWithAuth(url, options = {}) {
+  const token = getStoredToken()
   const defaultOptions = {
     headers: {
       'Content-Type': 'application/json',
-      // Add auth token if available
-      ...(localStorage.getItem('token') && {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      ...(token && {
+        Authorization: `Bearer ${token}`
       })
     },
   }

@@ -7,7 +7,7 @@
 
     <form class="space-y-5" @submit.prevent="emit('submit')">
       <div class="space-y-2">
-        <label for="login-email" class="block text-sm font-medium text-foreground">{{ t('login.emailLabel') }}</label>
+        <label for="login-username" class="block text-sm font-medium text-foreground">{{ t('login.usernameLabel') }}</label>
         <div class="relative">
           <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-muted-foreground">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -15,11 +15,11 @@
             </svg>
           </span>
           <input
-            id="login-email"
-            v-model="emailModel"
-            type="email"
-            autocomplete="off"
-            :placeholder="t('login.emailPlaceholder')"
+            id="login-username"
+            v-model="usernameModel"
+            type="text"
+            autocomplete="username"
+            :placeholder="t('login.usernamePlaceholder')"
             class="h-12 w-full rounded-2xl border border-border/80 bg-card pl-12 pr-4 text-sm text-foreground outline-none transition focus:border-primary/50 focus:ring-4 focus:ring-primary/10"
             @focus="emit('focus-change', true)"
             @blur="emit('focus-change', false)"
@@ -117,7 +117,7 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
-  email: { type: String, required: true },
+  username: { type: String, required: true },
   password: { type: String, required: true },
   showPassword: { type: Boolean, default: false },
   rememberMe: { type: Boolean, default: false },
@@ -127,7 +127,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits([
-  'update:email',
+  'update:username',
   'update:password',
   'update:showPassword',
   'update:rememberMe',
@@ -139,9 +139,9 @@ const emit = defineEmits([
 
 const { t } = useI18n()
 
-const emailModel = computed({
-  get: () => props.email,
-  set: (value) => emit('update:email', value)
+const usernameModel = computed({
+  get: () => props.username,
+  set: (value) => emit('update:username', value)
 })
 
 const passwordModel = computed({

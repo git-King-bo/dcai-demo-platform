@@ -14,7 +14,7 @@ const routes = [
   { path: '/datasets', name: 'datasets', component: () => import('../views/DatasetsPage.vue') },
   { path: '/datasets/:id(.*)', name: 'dataset-detail', component: () => import('../views/DatasetDetailPage.vue') },
   { path: '/operator', name: 'dataflow', component: () => import('../views/DataFlowPage.vue') },
-  { path: '/dataflow/canvas', name: 'dataflow-canvas', component: () => import('../views/DataFlowCanvasPage.vue') },
+  { path: '/dataflow/work', name: 'dataflow-work', component: () => import('@/views/dataflow/OperatorWorkflow.vue') },
   { path: '/dataflow/tasks', name: 'dataflow-tasks', component: () => import('../views/DataFlowTasksPage.vue') },
   { path: '/dataflow/tasks/:id', name: 'task-detail', component: () => import('../views/TaskDetailRouter.vue') },
   { path: '/dataflow/:id(.*)', redirect: '/dataflow' },

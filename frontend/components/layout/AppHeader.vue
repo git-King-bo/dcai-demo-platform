@@ -103,7 +103,7 @@
             <CrownIcon class="w-5 h-5" />
           </div>
           <div class="flex flex-col items-start">
-            <span class="text-sm font-bold leading-tight text-foreground">Alice</span>
+            <span class="text-sm font-bold leading-tight text-foreground">{{ displayName }}</span>
             <span class="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">PRO MEMBER</span>
           </div>
           <ChevronDownIcon class="ml-1 w-4 h-4 text-muted-foreground transition-transform duration-200" :class="{ 'rotate-180': showUserMenu }" />
@@ -113,8 +113,8 @@
         <Transition name="brake-pop">
           <div v-if="showUserMenu" class="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-[28px] border border-white/28 bg-[linear-gradient(180deg,hsl(var(--glass-highlight)/0.28),hsl(var(--glass-highlight)/0.08)),linear-gradient(180deg,hsl(var(--popover)/0.84),hsl(var(--card)/0.48))] py-2 shadow-[0_28px_70px_hsl(var(--glass-shadow)/0.18)] backdrop-blur-2xl">
             <div class="border-b border-white/14 px-4 py-3">
-              <p class="text-sm font-bold text-popover-foreground">Alice</p>
-              <p class="mt-0.5 text-xs text-muted-foreground">alice@example.com</p>
+              <p class="text-sm font-bold text-popover-foreground">{{ displayName }}</p>
+              <p class="mt-0.5 text-xs text-muted-foreground">{{ displayEmail }}</p>
             </div>
             <div class="py-1">
               <a href="#" class="mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-[18px] px-4 py-2.5 text-sm text-popover-foreground transition-all duration-300 hover:bg-white/14 hover:text-primary">
@@ -158,9 +158,11 @@ import { ref, computed, onMounted, onUnmounted, h } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import SettingsDrawer from '@/components/common/SettingsDrawer.vue'
+import { useUserStore } from '@/store/modules/user'
 
 const route = useRoute()
 const router = useRouter()
+const userStore = useUserStore()
 const searchQuery = ref('')
 const showUserMenu = ref(false)
 const showLanguageMenu = ref(false)
@@ -168,6 +170,8 @@ const showSettingsDrawer = ref(false)
 
 const { locale, t } = useI18n()
 const currentLocale = computed(() => locale.value)
+const displayName = computed(() => userStore.userName || 'Alice')
+const displayEmail = computed(() => userStore.userEmail || 'alice@example.com')
 
 function setLanguage(lang) {
   locale.value = lang
@@ -239,9 +243,10 @@ const CrownIcon = () => h('svg', { class: 'w-5 h-5', fill: 'currentColor', viewB
 const SparklesIcon = () => h('svg', { class: 'w-4 h-4', fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' }, [
   h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z' })
 ])
-const logout=()=>{
-  localStorage.removeItem('token')
-  localStorage.removeItem('user')
+
+async function logout() {
+  showUserMenu.value = false
+  await userStore.logout()
   router.push('/login')
 }
 // Page title based on route

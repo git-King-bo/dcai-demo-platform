@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
   :root,
   [data-theme='light'] {
@@ -132,6 +131,7 @@
       linear-gradient(180deg, hsl(var(--background) / 1), hsl(var(--background) / 0.98));
     background-attachment: fixed;
     transition: background-color 260ms ease, color 260ms ease;
+    line-height: normal;
   }
 
   ::selection {

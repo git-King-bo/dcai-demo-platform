@@ -69,8 +69,8 @@
     "welcomeTag": "欢迎回来",
     "title": "登录你的工作空间",
     "subtitle": "这些角色会根据你的鼠标、输入状态和密码是否可见做出互动反馈。",
-    "emailLabel": "邮箱",
-    "emailPlaceholder": "name{'@'}example.com",
+    "usernameLabel": "用户名",
+    "usernamePlaceholder": "请输入用户名",
     "passwordLabel": "密码",
     "passwordPlaceholder": "请输入密码",
     "rememberMe": "30 天内记住我",
@@ -94,7 +94,7 @@
     "registerSuccess": "注册信息已提交，后续接入接口后即可完成创建账号。",
     "resetPasswordSuccess": "重置密码邮件已发送占位成功，后续替换接口即可启用。",
     "validation": {
-      "emailRequired": "请输入邮箱地址。",
+      "usernameRequired": "请输入用户名。",
       "fullNameRequired": "请输入姓名。",
       "passwordRequired": "请输入密码。",
       "passwordMismatch": "两次输入的密码不一致。"

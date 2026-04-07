@@ -19,7 +19,7 @@
       >
         <AppHeader />
 
-        <div class="flex-1 p-6">
+        <div class="flex-1">
           <router-view v-slot="{ Component, route: slotRoute }">
             <Transition name="fade-slide" mode="out-in">
               <keep-alive :include="keepInclude">
@@ -29,7 +29,7 @@
           </router-view>
         </div>
 
-        <AppFooter />
+        <!-- <AppFooter /> -->
       </main>
     </div>
   </div>

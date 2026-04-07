@@ -69,8 +69,8 @@
     "welcomeTag": "Welcome Back",
     "title": "Sign in to your workspace",
     "subtitle": "Animated characters react to your cursor, your typing, and your password visibility state.",
-    "emailLabel": "Email",
-    "emailPlaceholder": "name{'@'}example.com",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Enter your username",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Password",
     "rememberMe": "Remember for 30 days",
@@ -94,7 +94,7 @@
     "registerSuccess": "Registration submitted successfully as a placeholder flow. Swap in the real API when ready.",
     "resetPasswordSuccess": "Password reset request sent through the placeholder flow. Replace with the real API to enable email delivery.",
     "validation": {
-      "emailRequired": "Please enter your email address.",
+      "usernameRequired": "Please enter your username.",
       "fullNameRequired": "Please enter your full name.",
       "passwordRequired": "Please enter your password.",
       "passwordMismatch": "The passwords do not match."

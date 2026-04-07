@@ -122,14 +122,14 @@
             <LoginForm
               v-if="isLoginMode"
               key="login"
-              :email="email"
+              :username="username"
               :password="password"
               :show-password="showPassword"
               :remember-me="rememberMe"
               :is-loading="isLoading"
               :error="error"
               :success-message="successMessage"
-              @update:email="email = $event"
+              @update:username="username = $event"
               @update:password="password = $event"
               @update:show-password="showPassword = $event"
               @update:remember-me="rememberMe = $event"
@@ -142,7 +142,7 @@
               v-else-if="isRegisterMode"
               key="register"
               :full-name="fullName"
-              :email="email"
+              :email="username"
               :password="password"
               :confirm-password="confirmPassword"
               :show-password="showPassword"
@@ -150,7 +150,7 @@
               :error="error"
               :success-message="successMessage"
               @update:full-name="fullName = $event"
-              @update:email="email = $event"
+              @update:email="username = $event"
               @update:password="password = $event"
               @update:confirm-password="confirmPassword = $event"
               @update:show-password="showPassword = $event"
@@ -161,11 +161,11 @@
             <ForgotPasswordForm
               v-else
               key="forgot-password"
-              :email="email"
+              :email="username"
               :is-loading="isLoading"
               :error="error"
               :success-message="successMessage"
-              @update:email="email = $event"
+              @update:email="username = $event"
               @focus-change="isTyping = $event"
               @submit="handleSubmit"
               @navigate-login="navigateToMode('login')"
@@ -181,6 +181,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ysOrbitBadge from '@/assets/branding/ys-orbit-badge.svg'
+import { useUserStore } from '@/store/modules/user'
 import ForgotPasswordForm from './ForgotPasswordForm.vue'
 import EyeBall from './EyeBall.vue'
 import LoginForm from './LoginForm.vue'
@@ -197,10 +198,11 @@ const props = defineProps({
 const emit = defineEmits(['mode-change', 'auth-success'])
 
 const { t } = useI18n()
+const userStore = useUserStore()
 
 const showPassword = ref(false)
 const fullName = ref('')
-const email = ref('')
+const username = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 const error = ref('')
@@ -489,26 +491,52 @@ async function simulateAuthRequest() {
   })
 }
 
+function resolveLoginError(error) {
+  const detail = error?.data || error
+
+  if (Array.isArray(detail?.non_field_errors) && detail.non_field_errors.length > 0) {
+    return detail.non_field_errors[0]
+  }
+
+  if (Array.isArray(detail?.detail) && detail.detail.length > 0) {
+    return detail.detail[0]
+  }
+
+  if (typeof detail?.detail === 'string' && detail.detail) {
+    return detail.detail
+  }
+
+  if (typeof detail?.msg === 'string' && detail.msg && detail.msg !== 'Invalid credentials') {
+    return detail.msg
+  }
+
+  if (typeof error?.message === 'string' && error.message && error.message !== 'Invalid credentials') {
+    return error.message
+  }
+
+  return t('login.invalidCredentials')
+}
+
 async function handleSubmit() {
   error.value = ''
   successMessage.value = ''
   isLoading.value = true
 
-  await simulateAuthRequest()
-
-  if (!email.value) {
-    error.value = t('login.validation.emailRequired')
+  if (!username.value) {
+    error.value = t('login.validation.usernameRequired')
     isLoading.value = false
     return
   }
 
   if (isForgotPasswordMode.value) {
+    await simulateAuthRequest()
     successMessage.value = t('login.resetPasswordSuccess')
     isLoading.value = false
     return
   }
 
   if (isRegisterMode.value) {
+    await simulateAuthRequest()
     if (!fullName.value) {
       error.value = t('login.validation.fullNameRequired')
       isLoading.value = false
@@ -532,15 +560,28 @@ async function handleSubmit() {
     return
   }
 
-  if (email.value === 'erik@gmail.com' && password.value === '1234') {
+  if (!password.value) {
+    error.value = t('login.validation.passwordRequired')
+    isLoading.value = false
+    return
+  }
+
+  try {
+    const user = await userStore.login({
+      username: username.value,
+      password: password.value,
+      rememberMe: rememberMe.value
+    })
+
     successMessage.value = t(rememberMe.value ? 'login.successRemember' : 'login.success')
     emit('auth-success', {
       mode: 'login',
-      email: email.value,
-      rememberMe: rememberMe.value
+      username: user?.username || username.value,
+      rememberMe: rememberMe.value,
+      user
     })
-  } else {
-    error.value = t('login.invalidCredentials')
+  } catch (loginError) {
+    error.value = resolveLoginError(loginError)
   }
 
   isLoading.value = false

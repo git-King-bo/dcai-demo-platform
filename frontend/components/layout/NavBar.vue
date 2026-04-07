@@ -271,7 +271,7 @@ const QuestionMarkCircleIcon = () => h('svg', { class: 'w-4 h-4', fill: 'none', 
 const navLinks = [
   { to: '/datasets', labelKey: 'nav.datasets', icon: DatabaseIcon },
   { to: '/knowledge-base', labelKey: 'nav.knowledgeBase', icon: BookOpenIcon },
-  { to: '/dataflow/canvas', labelKey: 'nav.dataflow', icon: CanvasIcon },
+  { to: '/dataflow/work', labelKey: 'nav.dataflow', icon: CanvasIcon },
   { to: '/operator', labelKey: 'nav.packages', icon: PackageIcon },
   // {
   //   to: '/dataflow/canvas',
