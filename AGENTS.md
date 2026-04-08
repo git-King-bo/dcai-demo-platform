@@ -16,3 +16,12 @@ Use `@/.trellis/` to learn:
 Keep this managed block so 'trellis update' can refresh the instructions.
 
 <!-- TRELLIS:END -->
+
+## Project UI Guidance
+
+Before writing or changing frontend styles, read:
+
+- `.agents/skills/skill-ui/SKILL.md`
+- `.trellis/spec/frontend/jelly-ui-skill.md`
+
+New UI should follow the existing Jelly component language unless the user explicitly asks for a different visual direction.

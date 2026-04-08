@@ -25,6 +25,7 @@
 | [directory-structure.md](./directory-structure.md)                             | Project structure conventions                   | Reference     |
 | [services.md](./services.md)                                                   | API service layer and mock data patterns        | Reference     |
 | [css-design.md](./css-design.md)                                               | Tailwind styling and design tokens              | Reference     |
+| [jelly-ui-skill.md](./jelly-ui-skill.md)                                       | Project Jelly UI language and styling rules     | Reference     |
 | [quality.md](./quality.md)                                                     | Code quality and performance standards          | Reference     |
 
 ---
@@ -45,6 +46,7 @@
 | Manage application state | [state-management.md](./state-management.md) |
 | Interact with API / Mock | [services.md](./services.md)                 |
 | Build UI components      | [components.md](./components.md)             |
+| Match the Jelly UI style | [jelly-ui-skill.md](./jelly-ui-skill.md)     |
 | Ensure data validity     | [type-safety.md](./type-safety.md)           |
 
 ### Before Committing
@@ -53,6 +55,7 @@
 | ----------------------- | -------------------------------- |
 | Check code quality      | [quality.md](./quality.md)       |
 | Verify CSS organization | [css-design.md](./css-design.md) |
+| Verify Jelly style fit  | [jelly-ui-skill.md](./jelly-ui-skill.md) |
 
 ---
 

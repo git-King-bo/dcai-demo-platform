@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
 import './assets/main.css'
-import './assets/space.scss'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css';
 import { createPinia } from "pinia"
