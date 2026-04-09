@@ -3,7 +3,7 @@
     <button
       type="button"
       class="jelly-dropdown-trigger"
-      :class="[block ? 'w-full' : '', triggerClass]"
+      :class="[block ? 'w-full' : '', resolvedUi.triggerClass]"
       @click="toggleOpen"
     >
       <slot name="trigger" :open="isOpen" :selected-option="selectedOption">
@@ -34,15 +34,19 @@
       <div
         v-if="isOpen"
         class="jelly-dropdown-panel"
-        :class="[panelClass]"
+        :class="[resolvedUi.panelClass]"
+        :style="resolvedUi.panelStyle"
       >
-        <div class="space-y-2">
+        <div
+          :class="['space-y-2 overflow-y-auto', resolvedUi.listClass]"
+          :style="resolvedUi.listStyle"
+        >
           <button
             v-for="option in options"
             :key="option.value"
             type="button"
             class="jelly-dropdown-option"
-            :class="option.value === modelValue ? 'jelly-dropdown-option-active' : ''"
+            :class="[option.value === modelValue ? 'jelly-dropdown-option-active' : '', resolvedUi.optionClass]"
             @click="selectOption(option.value)"
           >
             <slot
@@ -78,8 +82,16 @@ const props = defineProps({
   placeholder: { type: String, default: 'Select an option' },
   block: { type: Boolean, default: true },
   closeOnSelect: { type: Boolean, default: true },
+  ui: {
+    type: Object,
+    default: () => ({}),
+  },
   triggerClass: { type: String, default: '' },
   panelClass: { type: String, default: '' },
+  panelStyle: { type: [String, Object, Array], default: '' },
+  listClass: { type: String, default: '' },
+  listStyle: { type: [String, Object, Array], default: '' },
+  optionClass: { type: String, default: '' },
 })
 
 const emit = defineEmits(['update:modelValue', 'change', 'open', 'close'])
@@ -88,6 +100,15 @@ const isOpen = ref(false)
 const rootRef = ref(null)
 
 const selectedOption = computed(() => props.options.find((option) => option.value === props.modelValue) || null)
+
+const resolvedUi = computed(() => ({
+  triggerClass: props.ui.triggerClass ?? props.triggerClass,
+  panelClass: props.ui.panelClass ?? props.panelClass,
+  panelStyle: props.ui.panelStyle ?? props.panelStyle,
+  listClass: props.ui.listClass ?? props.listClass,
+  listStyle: props.ui.listStyle ?? props.listStyle,
+  optionClass: props.ui.optionClass ?? props.optionClass,
+}))
 
 function toggleOpen() {
   isOpen.value = !isOpen.value
