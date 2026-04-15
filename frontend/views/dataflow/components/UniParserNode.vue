@@ -199,7 +199,6 @@
 <script setup>
 import { ref, computed, watch, onMounted, inject, nextTick } from 'vue'
 import { Handle, Position, useVueFlow } from '@vue-flow/core'
-import { ElSwitch, ElInput } from 'element-plus'
 import { useAgentStore } from '@/store/modules/agent'
 
 let agentStore = null
@@ -818,4 +817,3 @@ watch(() => props.data?.runConfig, (newRunConfig) => {
   box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.4), 0 2px 6px rgba(52, 199, 89, 0.3) !important;
 }
 </style>
-

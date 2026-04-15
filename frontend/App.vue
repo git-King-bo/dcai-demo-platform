@@ -15,7 +15,6 @@
 
       <main
         class="flex min-h-screen flex-1 flex-col transition-all duration-300 ease-in-out"
-        :class="sidebarCollapsed ? 'ml-16' : 'ml-60'"
       >
         <AppHeader />
 

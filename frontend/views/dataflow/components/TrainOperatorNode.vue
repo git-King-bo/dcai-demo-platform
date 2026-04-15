@@ -293,7 +293,6 @@
 <script setup>
 import { ref, computed, watch, onMounted, inject, nextTick } from 'vue'
 import { Handle, Position } from '@vue-flow/core'
-import { ElSelect, ElOption, ElSwitch } from 'element-plus'
 
 // Props
 const props = defineProps({

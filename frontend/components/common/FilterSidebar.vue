@@ -3,31 +3,44 @@
     <div v-for="group in groups" :key="group.label">
       <button
         @click="group.open = !group.open"
-        class="flex items-center justify-between w-full text-sm font-semibold text-gray-700 py-1"
+        class="flex w-full items-center justify-between rounded-2xl px-2 py-1.5 text-sm font-semibold text-foreground/78 transition-colors duration-200 hover:bg-white/8 hover:text-foreground"
       >
         {{ group.label }}
         <svg
-          class="w-4 h-4 transition-transform"
+          class="h-4 w-4 text-foreground/52 transition-transform duration-300"
           :class="{ 'rotate-180': group.open }"
           fill="none" stroke="currentColor" viewBox="0 0 24 24"
         >
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
         </svg>
       </button>
-      <div v-show="group.open" class="mt-1 space-y-1 max-h-48 overflow-y-auto">
+      <div v-show="group.open" class="scrollable mt-1 max-h-48 space-y-1 overflow-y-auto pr-1">
         <label
           v-for="option in group.options"
           :key="option.value"
-          class="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 cursor-pointer py-0.5"
+          :class="[
+            'flex cursor-pointer items-center gap-2 rounded-2xl border px-2.5 py-2 text-sm transition-all duration-200',
+            isSelected(group.key, option.value)
+              ? 'border-primary/25 bg-primary/12 text-foreground'
+              : 'border-transparent text-foreground/68 hover:border-white/10 hover:bg-white/8 hover:text-foreground',
+          ]"
         >
           <input
             type="checkbox"
             :checked="isSelected(group.key, option.value)"
             @change="toggle(group.key, option.value)"
-            class="rounded border-gray-300 text-dc-primary focus:ring-dc-primary"
+            class="h-4 w-4 rounded border-border bg-card/70 text-primary focus:ring-2 focus:ring-primary/20 focus:ring-offset-0"
           />
           <span class="truncate">{{ option.label }}</span>
-          <span v-if="option.count !== undefined" class="text-gray-400 text-xs ml-auto">{{ option.count }}</span>
+          <span
+            v-if="option.count !== undefined"
+            :class="[
+              'ml-auto text-xs tabular-nums',
+              isSelected(group.key, option.value) ? 'text-primary' : 'text-muted-foreground',
+            ]"
+          >
+            {{ option.count }}
+          </span>
         </label>
       </div>
     </div>

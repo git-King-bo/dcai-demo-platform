@@ -59,7 +59,7 @@
 
 <script setup>
 import { ref, computed, watch, nextTick } from 'vue'
-import { ElDialog, ElButton, ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps({
   modelValue: {

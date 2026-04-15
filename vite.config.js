@@ -21,15 +21,19 @@ export default defineConfig(({ mode }) => {
     "http://localhost:8000",
   );
   const agentWsTarget = resolveProxyTarget(env.VITE_AGENT_WS_URL, apiTarget);
+  const base = env.VITE_PUBLIC_BASE || "/";
+  const isProd = mode === "production";
 
   return {
+    base,
     plugins: [
       vue(),
-      codeInspectorPlugin({
-        bundler: "vite",
-        editor: "code",
-      }),
-    ],
+      !isProd &&
+        codeInspectorPlugin({
+          bundler: "vite",
+          editor: "code",
+        }),
+    ].filter(Boolean),
     resolve: {
       alias: {
         "@": "/frontend",
@@ -49,6 +53,60 @@ export default defineConfig(({ mode }) => {
         //   changeOrigin: true,
         //   ws: true,
         // },
+      },
+    },
+    preview: {
+      host: true,
+      port: 4174,
+    },
+    build: {
+      outDir: "dist",
+      assetsDir: "assets",
+      sourcemap: env.VITE_BUILD_SOURCEMAP === "true",
+      chunkSizeWarningLimit: 900,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) {
+              return;
+            }
+
+            if (id.includes("element-plus")) {
+              return "vendor-element-plus";
+            }
+
+            if (id.includes("@vue-flow")) {
+              return "vendor-vue-flow";
+            }
+
+            if (
+              id.includes("graphology") ||
+              id.includes("sigma")
+            ) {
+              return "vendor-graph";
+            }
+
+            if (
+              id.includes("markdown-it") ||
+              id.includes("highlight.js") ||
+              id.includes("katex") ||
+              id.includes("pdfjs")
+            ) {
+              return "vendor-content";
+            }
+
+            if (
+              id.includes("vue") ||
+              id.includes("vue-router") ||
+              id.includes("vue-i18n") ||
+              id.includes("pinia")
+            ) {
+              return "vendor-vue";
+            }
+
+            return "vendor-misc";
+          },
+        },
       },
     },
   };

@@ -431,7 +431,7 @@ import { useAgentStore } from '@/store/modules/agent'
 import { useAgentWebSocket } from '@/composables/useAgentWebSocket'
 import { useAgentMessages } from '@/composables/useAgentMessages'
 import AgentMessage from './AgentMessage.vue'
-import { ElMessage, ElMessageBox, ElSwitch } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { getConversationList, deleteConversation } from '@/api/dataflow'
 import { getList as getDatasetList } from '@/api/dataflow'
 import VirtualDropdown from '@/components/dataflow/VirtualDropdown.vue'
@@ -2455,4 +2455,3 @@ onMounted(() => {
     margin-right: 8px;
   }
 </style>
-

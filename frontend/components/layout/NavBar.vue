@@ -1,12 +1,12 @@
 <template>
   <aside 
-    class="fixed left-0 top-0 z-50 flex h-full flex-col overflow-hidden transition-all duration-500 ease-out"
+    class="flex h-100vh flex-col  transition-all duration-500 ease-out"
     :class="[
       isCollapsed ? 'w-16' : 'w-60',
       'border-r border-white/24 bg-[linear-gradient(180deg,hsl(var(--glass-highlight)/0.24),hsl(var(--glass-highlight)/0.08)),linear-gradient(180deg,hsl(var(--sidebar)/0.82),hsl(var(--card)/0.58))] text-sidebar-foreground shadow-[0_28px_80px_hsl(var(--glass-shadow)/0.16)] backdrop-blur-[28px]'
     ]"
   >
-    <div class="pointer-events-none absolute inset-0">
+    <div class="pointer-events-none absolute inset-[-1px]">
       <div class="absolute inset-x-4 top-0 h-px bg-white/50"></div>
       <div class="absolute -left-10 top-12 h-36 w-36 rounded-full bg-white/18 blur-3xl"></div>
       <div class="absolute -right-10 bottom-24 h-44 w-44 rounded-full bg-primary/12 blur-3xl"></div>

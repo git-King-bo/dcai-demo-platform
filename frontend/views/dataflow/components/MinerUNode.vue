@@ -182,7 +182,6 @@
 <script setup>
 import { ref, computed, watch, onMounted, inject, nextTick } from 'vue'
 import { Handle, Position } from '@vue-flow/core'
-import { ElSelect, ElOption } from 'element-plus'
 
 // Props - Vue Flow会传递所有节点数据作为props
 const props = defineProps({
